@@ -1,5 +1,7 @@
 package ambiental.ambiental.Model;
 
-public interface IDescripcion extends CrudRepository<descripcion, Integer> {
+import org.springframework.data.repository.CrudRepository;
+
+public interface Idescripcion extends CrudRepository<descripcion, Integer> {
     
 }
