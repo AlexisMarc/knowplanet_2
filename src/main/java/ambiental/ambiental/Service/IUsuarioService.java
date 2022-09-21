@@ -11,5 +11,5 @@ public interface IUsuarioService {
     public void save(Usuario usuario);
     public Usuario findOne(Integer idUsuario);
     public void delete(Integer idUsuario);
-
+    public String encryptThisString(String input);
 }
