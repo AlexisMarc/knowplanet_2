@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xlmns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <h1>Ver Usuarios</h1>
+    <table class="table" id="datat">
+        <thead class="bg-info">
+            <th>Id Usuario</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Estado</th>
+        </thead>
+        <tbody>
+            <tr th:if="${usuario.size()>0}" th:each="us:${usuario}">
+                <td th:text="${us.idUsuario}"></td>
+                <td th:text="${us.nombreUsuario}"></td>
+                <td th:text="${us.apellidoUsuario}"></td>
+                <td th:text="${us.emailUsuario  }"></td>
+                <td th:text="${us.rolUsuario}"></td>
+                <td th:text="${us.estadoUsuario}"></td>
+                <td> 
+                    <a role="button" class="btn btn-outline-warning btn-sm" th:href="@{/usuario/editarUsu/}+${us.idUsuario}"onclick="return confirm('Estás seguro que quieres editar este usuario?');"> 
+                        <i class="bi bi-pencil">Editar</i> 
+                    </a> 
+          
+                </td>
+              
+            </tr>
+            <a th:href="@{/usuario/addUsuario}"><button type="button" class="btn btn-outline-info" >Agregar Usuario</button></a>
+        </tbody>
+    </table>
+</body>
+</html>

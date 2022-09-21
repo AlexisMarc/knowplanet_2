@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Imagen</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Url</th>
+            <th>Publicación</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="i:${imagenes}">
+            <td th:text="${i.idImagen}"></td>
+            <td th:text="${i.urlImagen}"></td>
+            <!-- <td th:text="${i.publicacion.idPublicacion}"></td> -->
+            <td>
+                <a href="" data-toggle="modal" th:attr="data-target='#modal-edit'+${i.idImagen}"><button class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                  </svg></button>
+                </a>
+
+                <!-- MODAL EDITAR -->
+                <div class="modal fade" tabindex="-1" th:id="modal-edit+${i.idImagen}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Editar Imagen</h5>
+                            </div>
+                            <form th:action="@{/imagen/add}" method="post" th:object="${imagen}">
+                                <div class="modal-body">
+                                    <input type="hidden" name="idImagen" th:value="${i.idImagen}">
+                                    <label for="">Url</label>
+                                    <input type="text" name="urlImagen" th:value="${i.urlImagen}" required>
+                                    <!-- <label for="">Publicación</label>
+                                    <select name="publicacion" required>
+                                        <option th:value="${i.publicacion.idPublicacion}" th:text="${i.publicacion.idPublicacion}">Seleccionar</option>
+                                        <option th:each="p:${publicaciones}" th:value="${p.idPublicacion}" th:text="${p.idPublicacion}"></option>
+                                    </select> -->
+                                </div> 
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
