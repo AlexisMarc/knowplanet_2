@@ -21,46 +21,54 @@ import jakarta.validation.constraints.Pattern;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idUsuario;
 
     @Pattern(regexp = "^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$")
-    @Column(length = 30)
-    private String nombre;
+    @Column(name = "nombreUsuario",length = 30)
+    private String nombreUsuario;
 
     @Pattern(regexp = "^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$")
-    @Column(length = 30)
-    private String apellido;
+    @Column(name = "apellidoUsuario",length = 30)
+    private String apellidoUsuario;
 
     @Email(message = "Email no válido", regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
     @NotEmpty(message = "Email no puede estar vacío")
-    @Column( length = 70)
-    private String email;
+    @Column(name = "emailUsuario", length = 70)
+    private String emailUsuario;
 
     @Pattern(regexp = "^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$")
     @NotEmpty
-    @Column(length = 20)
+    @Column(name = "rolUsuario", length = 20)
     private String rolUsuario = "USUARIO";
 
     @NotEmpty
-    @Column( length = 200)
-    private String clave;
+    @Column(name = "claveUsuario", length = 200)
+    private String claveUsuario;
 
+    @Column(name="estadoUsuario")
     private boolean estadoUsuario ;
 
     @OneToMany(mappedBy = "idUsuarioFK", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Publicacion> publicacion;
+    //----------------------------------CONSTRUCTORES--------------------------------//
 
-    public Usuario(Integer id, @Pattern(regexp = "^[a-zA-ZÀ-ÿñÑ]+( *[a-zA-ZÀ-ÿñÑ]*)*[a-zA-ZÀ-ÿñÑ]+$") String nombre,
-            @Pattern(regexp = "^[a-zA-ZÀ-ÿñÑ]+( *[a-zA-ZÀ-ÿñÑ]*)*[a-zA-ZÀ-ÿñÑ]+$") String apellido,
-            @Email(message = "Email no válido", regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])") @NotEmpty(message = "Email no puede estar vacío") String email,
-            @Pattern(regexp = "^[a-zA-ZÀ-ÿñÑ]+( *[a-zA-ZÀ-ÿñÑ]*)*[a-zA-ZÀ-ÿñÑ]+$") @NotEmpty String rolUsuario,
-            @NotEmpty String clave, boolean estadoUsuario, List<Publicacion> publicacion) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
+    public Usuario(Integer idUsuario, String nombreUsuario, String apellidoUsuario, String emailUsuario, String rolUsuario, String claveUsuario, boolean estadoUsuario, List<Publicacion> publicacion) {
+        this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoUsuario = apellidoUsuario;
+        this.emailUsuario = emailUsuario;
         this.rolUsuario = rolUsuario;
-        this.clave = clave;
+        this.claveUsuario = claveUsuario;
+        this.estadoUsuario = estadoUsuario;
+        this.publicacion = publicacion;
+    }
+
+    public Usuario(String nombreUsuario, String apellidoUsuario, String emailUsuario, String rolUsuario, String claveUsuario, boolean estadoUsuario, List<Publicacion> publicacion) {
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoUsuario = apellidoUsuario;
+        this.emailUsuario = emailUsuario;
+        this.rolUsuario = rolUsuario;
+        this.claveUsuario = claveUsuario;
         this.estadoUsuario = estadoUsuario;
         this.publicacion = publicacion;
     }
@@ -68,52 +76,51 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Integer getId() {
-        return id;
+    public Usuario(String emailUsuario, String claveUsuario) {
+        this.emailUsuario = emailUsuario;
+        this.claveUsuario = claveUsuario;
+    }
+    //----------------------------------MÉTODOS ACCESORES--------------------------------//
+
+  
+
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidoUsuario(String apellidoUsuario) {
+        this.apellidoUsuario = apellidoUsuario;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getEmailUsuario() {
+        return emailUsuario;
     }
-
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
+    }
     public String getRolUsuario() {
         return rolUsuario;
     }
 
     public void setRolUsuario(String rolUsuario) {
         this.rolUsuario = rolUsuario;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
     }
 
     public boolean isEstadoUsuario() {
@@ -131,9 +138,16 @@ public class Usuario {
     public void setPublicacion(List<Publicacion> publicacion) {
         this.publicacion = publicacion;
     }
-    
-    //----------------------------------CONSTRUCTORES--------------------------------//
 
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-    
+    public String getClaveUsuario() {
+        return claveUsuario;
+    }
+
+    public void setClaveUsuario(String claveUsuario) {
+        this.claveUsuario = claveUsuario;
+    }
 }
