@@ -3,18 +3,18 @@ package ambiental.ambiental.Model;
 import java.util.List;
 
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "publicacion")
@@ -37,13 +37,22 @@ public class Publicacion {
     private List<Imagen> imagen;
 
     @OneToMany(mappedBy = "publicacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<descripcion> descripcion;
+    private List<Descripcion> descripcion;
+
+    @OneToMany(mappedBy = "publicacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Prueba> prueba;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Categoria categoria;
 
     public Publicacion() {
     }
 
+    
+
     public Publicacion(int idPublicacion, @NotEmpty String titulo, @NotEmpty String fecha, @NotNull Boolean estado,
-            Usuario idUsuarioFK, List<Imagen> imagen, List<ambiental.ambiental.Model.descripcion> descripcion) {
+            Usuario idUsuarioFK, List<Imagen> imagen, List<Descripcion> descripcion, List<Prueba> prueba,
+            Categoria categoria) {
         this.idPublicacion = idPublicacion;
         this.titulo = titulo;
         this.fecha = fecha;
@@ -51,7 +60,11 @@ public class Publicacion {
         this.idUsuarioFK = idUsuarioFK;
         this.imagen = imagen;
         this.descripcion = descripcion;
+        this.prueba = prueba;
+        this.categoria = categoria;
     }
+
+
 
     public int getIdPublicacion() {
         return idPublicacion;
@@ -101,12 +114,36 @@ public class Publicacion {
         this.imagen = imagen;
     }
 
-    public List<descripcion> getDescripcion() {
+    public List<Descripcion> getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(List<descripcion> descripcion) {
+    public void setDescripcion(List<Descripcion> descripcion) {
         this.descripcion = descripcion;
+    }
+
+
+
+    public List<Prueba> getPrueba() {
+        return prueba;
+    }
+
+
+
+    public void setPrueba(List<Prueba> prueba) {
+        this.prueba = prueba;
+    }
+
+
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     

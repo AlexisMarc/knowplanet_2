@@ -4,18 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import ambiental.ambiental.Model.Usuario;
 import ambiental.ambiental.Service.UsuarioServiceImpl;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 @SessionAttributes("usuario")
@@ -26,7 +23,7 @@ public class UsuarioController {
     UsuarioServiceImpl usuI;
 
     // -------------------------------------------------------------VER----------------------------------------------------//
-    @GetMapping(value = "/verUsuarios")
+    @GetMapping(path = {"/","","/usuario"})
     public String verUsuarios(Model m) {
 
         m.addAttribute("usuario", usuI.findAll());
@@ -54,7 +51,7 @@ public class UsuarioController {
         usuI.save(usuario);
     
         status.setComplete();
-        return "redirect:verUsuarios";
+        return "redirect:";
     }
 
     // -------------------------------------------------------------ACTUALIZAR----------------------------------------------------//

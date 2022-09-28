@@ -19,7 +19,7 @@
 
     </div>
     <div class="container text-center">
-        <form th:action="@{/publicacions/guardar}" th:object="${publicacion}"
+        <form th:action="@{/publicacion/guardar}" th:object="${publicacion}"
 			method="post" style="max-width: 600px; margin: 0 auto;">
 			<input type="hidden" th:field="*{idPublicacion}" th:value="${publicacion.idPublicacion}" />
 			<div class="m-3">

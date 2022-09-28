@@ -1,21 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar</title>
-</head>
+
+<!-- *************************************************************************************************** -->
+<!-- ------------------------------------------HEAD-------------------------------------- -->
+<!-- *************************************************************************************************** -->
+<head th:replace="layout/base::head"></head>
 <body>
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------LOADING-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <div th:replace="layout/base::loading"></div>
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------LOGIN-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <div th:replace="layout/base::login"></div>
 
-    <form th:action="@{/imagen/add}" th:object="${imagen}" method="post">
-        <input type="hidden" name="idImagen" th:field="*{idImagen}">
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------MENU-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <header th:replace="layout/base::menu"></header>
+    <!-- ************************************************************************************************************************ -->
+    <!-- ************************************************************************************************************************ -->
+    <!-- ------------------------------------------------CONTENIDO------------------------------------------- -->
 
-        <label for="">Url</label>
-        <input type="text" name="urlImagen" th:field="*{urlImagen}" required placeholder="Ingresa la url de la imagen a registrar.">
+    <section class="inner-page-banner-section gradient-bg">
+        <div class="illustration-img"><img src="assets/images/Save the Earth-bro.png" alt="50%"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="inner-page-content-area">
+                        <h2 class="page-title">Imagen</h2>
+                        <nav aria-label="breadcrumb" class="page-header-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="home-one.html">Home</a></li>
+                                <li class="breadcrumb-item">Imagen</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contact-section mt-minus pb-120">
+        <div class="container">
+            <div class="contact-form-area">
+                <form th:action="@{/imagen/add}" th:object="${imagen}" method="post">
+                    <input type="hidden" name="idImagen" th:field="*{idImagen}">
+            
+                    <label for="">Url</label>
+                    <input type="text" name="urlImagen" id="urlImagen" th:field="*{urlImagen}" autocomplete="off" required placeholder="Ingresa la url de la imagen a registrar.">
+            
+                    <button type="submit">Registrar</button>
+                </form>
+            
+                <form th:each="i:${imagenes}" th:object="${imagen}" method="post">
+                    <input type="hidden" name="idImagen" th:value="${i.idImagen}">
+            
+                    <label for="">Url</label>
+                    <input type="text" th:value="${i.urlImagen}" autocomplete="off" required placeholder="Ingresa la url de la imagen a registrar." readonly>
+                </form>
+            
+                <form th:action="@{/imagen/agregar}" th:object="${imagen}" method="post">
+                    <input type="hidden" name="idImagen" th:field="*{idImagen}">
+            
+                    <input type="text" name="urlImagen" id="urlImagen1" th:field="*{urlImagen}" autocomplete="off" required placeholder="Ingresa la url de la imagen a registrar." hidden>
+            
+                    <button type="submit" onclick="agregar()">Agregar Otra</button>
+                </form>
+            
+                <script>
+                    function agregar(){
+                        const url=document.getElementById('urlImagen').value;
+                        const url1=document.getElementById('urlImagen1').value=url;
+                    }
+                </script>
+            </div>
+        </div>
+    </section>
 
-        <button type="submit">Registrar</button>
-    </form>
-    
+    <!-- ---------------------------------------------FIN-CONTENIDO------------------------------------------- -->
+    <!-- ************************************************************************************************************************ -->
+    <!-- ************************************************************************************************************************ -->
+
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------FOOTER-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <footer th:replace="layout/base::footer"></footer>
+
+    <div class="scroll-to-top">
+        <span class="scroll-icon">
+            <i class="fa fa-rocket"></i>
+        </span>
+    </div>
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------SCRIPT-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <div th:replace="layout/base::script"></div>
 </body>
+
 </html>

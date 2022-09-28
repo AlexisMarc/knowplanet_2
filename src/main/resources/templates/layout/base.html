@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- *************************************************************************************************** -->
+<!-- ------------------------------------------HEAD-------------------------------------- -->
+<!-- *************************************************************************************************** -->
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Behoof - Isometric Investment Website HTML Templates</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/assets/images/favicon.png}" />
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/icofont.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/lightcase.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+</head>
+
+<body>
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------LOADING-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <!-- preloader start -->
+    <div th:fragment="loading" class="preloader">
+        <div class="preloader-box">
+            <div>L</div>
+            <div>O</div>
+            <div>A</div>
+            <div>D</div>
+            <div>I</div>
+            <div>N</div>
+            <div>G</div>
+        </div>
+    </div>
+    <!-- preloader end -->
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------LOGIN-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <!-- signin-area start -->
+    <div th:fragment="login" class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bdr-radius">
+                <div class="signin-wrapper">
+                    <div class="signin-wrapper-header text-center">
+                        <div class="logo"><img th:src="@{/assets/images/elements/logotipo.png}" alt="image" width="100px"></div>
+                        <h3 class="title">Login with</h3>
+                        <p>Welcome back, please sign in below</p>
+                    </div>
+                    <form class="signin-form">
+                        <div class="form-group">
+                            <label for="signinEmail">Email*</label>
+                            <input type="email" class="form-control" id="signinEmail" placeholder="Enter your Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="signinPass">Password*</label>
+                            <input type="password" class="form-control" id="signinPass" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-hover">Log In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- signin-area end -->
+
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------MENU-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <!--  header-section start  -->
+    <header th:fragment="menu" class="header-section transparent--header header--fixed">
+        <div class="header-bottom">
+            <div class="container">
+                <nav class="navbar navbar-expand-xl">
+                    <a class="site-logo site-title" th:href="@{index}"><img th:src="@{/assets/images/logo2.png}"
+                            alt="site-logo"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu-toggle"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav main-menu ml-auto">
+                            <li><a th:href="@{/index}">Home</a></li>
+                            <li><a th:href="@{/nosotros}">Nosotros</a></li>
+                            <li><a th:href="@{/categorias}">Caregorias</a></li>
+                            <li><a th:href="@{/noticias}">Noticias</a></li>
+                            <li><a th:href="@{/contactanos}">Contáctanos</a></li>
+                        </ul>
+                        <div class="header-join-part">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#signInModal">Iniciar Sesión</button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ************************************************************************************************************************ -->
+    <!-- ************************************************************************************************************************ -->
+    <!-- ------------------------------------------------CONTENIDO------------------------------------------- -->
+
+
+
+    <!-- ---------------------------------------------FIN-CONTENIDO------------------------------------------- -->
+    <!-- ************************************************************************************************************************ -->
+    <!-- ************************************************************************************************************************ -->
+
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------FOOTER-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <!-- footer-section start -->
+    <footer th:fragment="footer" class="footer-section">
+        <div class="footer-top bg_img" data-background="/assets/images/9898.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="footer-widget">
+                            <img th:src="@{/assets/images/logotipo.png}" alt="image" width="90%">
+                        </div>
+                    </div><!-- footer-widget end -->
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h3 class="widget-title">My Account</h3>
+                            <ul class="footer-menu-list">
+                                <li><a th:href="@{#0}">Manage Your Account</a></li>
+                                <li><a th:href="@{#0}">How to Deposit</a></li>
+                                <li><a th:href="@{#0}">How to Withdraw</a></li>
+                                <li><a th:href="@{#0}">Account Varification</a></li>
+                                <li><a th:href="@{#0}">Safety & Security</a></li>
+                                <li><a th:href="@{#0}">Investments</a></li>
+                                <li><a th:href="@{#0}">Membership Level</a></li>
+                            </ul>
+                        </div>
+                    </div><!-- footer-widget end -->
+                    
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h3 class="widget-title">legal info</h3>
+                            <ul class="footer-menu-list">
+                                <li><a th:href="@{#0}">Risk Warnings</a></li>
+                                <li><a th:href="@{#0}">Privacy Notice</a></li>
+                                <li><a th:href="@{#0}">Security</a></li>
+                                <li><a th:href="@{#0}">Terms of Service</a></li>
+                                <li><a th:href="@{#0}">Become Affiliate</a></li>
+                                <li><a th:href="@{#0}">Complaints Policy</a></li>
+                            </ul>
+                        </div>
+                    </div><!-- footer-widget end -->
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- footer-section end -->
+    
+    <!-- scroll-to-top start -->
+    <div class="scroll-to-top">
+        <span class="scroll-icon">
+            <i class="fa fa-rocket"></i>
+        </span>
+    </div>
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------SCRIPT-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+<div th:fragment="script">
+    <script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.nice-select.js}"></script>
+    <script th:src="@{/assets/js/lightcase.js}"></script>
+    <script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/assets/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/assets/js/wow.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.waypoints.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.countup.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.paroller.min.js}"></script>
+    <script th:src="@{/assets/js/main.js}"></script>
+</div>
+
+</body>
+
+<!-- Mirrored from pixner.net/behoof/demo/home-four by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 24 Mar 2020 15:01:36 GMT -->
+
+</html>

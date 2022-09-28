@@ -32,9 +32,9 @@
 							<span th:if="${publicacion.estado==false}">Inactivo</span>
 						</td>
 
-						<td><a th:href="@{'/publicacions/editar'+'/'+ ${publicacion.idPublicacion}}"class="btn btn-info">Editar</a> &nbsp; 
-							<a th:if="${publicacion.estado==true}" th:href="@{'/publicacions/estado'+ '/' + ${publicacion.idPublicacion}}" class="btn btn-danger">Inactivar</a>
-                        <a th:if="${publicacion.estado==false}" th:href="@{'/publicacions/estado'+ '/' + ${publicacion.idPublicacion}}" class="btn btn-info">Activar</a>
+						<td><a th:href="@{'editar'+'/'+ ${publicacion.idPublicacion}}"class="btn btn-info">Editar</a> &nbsp; 
+							<a th:if="${publicacion.estado==true}" th:href="@{'estado'+ '/' + ${publicacion.idPublicacion}}" class="btn btn-danger">Inactivar</a>
+                        <a th:if="${publicacion.estado==false}" th:href="@{'estado'+ '/' + ${publicacion.idPublicacion}}" class="btn btn-info">Activar</a>
 						</td>
 					</tr>
 				</tbody>

@@ -6,14 +6,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
 
 import ambiental.ambiental.Model.Publicacion;
 import ambiental.ambiental.Service.PublicacionRepository;
+import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/publicacion")
 public class PublicacionController {
 
     @Autowired
@@ -21,7 +26,7 @@ public class PublicacionController {
 
 
     // lista
-    @GetMapping("/publicacions")
+    @GetMapping(path = {"/","","/publicacions"})
     public String listarPublicacion(Model model) {
         List<Publicacion> listaPublicacion = publicacionrepository.findAll();
         model.addAttribute("listaPublicacion", listaPublicacion);
@@ -29,21 +34,24 @@ public class PublicacionController {
     }
 
     // formulario agregar
-    @GetMapping("/publicacions/nuevo")
+    @GetMapping("/nuevo")
     public String mostrarFormularioDeNuevoPublicacion(Model model) {
         model.addAttribute("publicacion", new Publicacion());
         return "views/publicacion/formulario_publicacion";
     }
 
     // guardar
-    @PostMapping("/publicacions/guardar")
-    public String guardarPublicacion(Publicacion publicacion) {
+    @PostMapping("/guardar")
+    public String guardarPublicacion(@Valid Publicacion publicacion,BindingResult res, Model m, SessionStatus status) {
+        if(res.hasErrors()){
+            return "views/publicacion/formulario_publicacion";
+        }
         publicacionrepository.save(publicacion);
-        return "redirect:/publicacions";
+        return "redirect:";
     }
 
     // editar
-    @GetMapping("/publicacions/editar/{idPublicacion}")
+    @GetMapping("/editar/{idPublicacion}")
     public String mostrarFormularioModeficarPublicacion(@PathVariable("idPublicacion")Integer idPublicacion,Model modelo){
         Publicacion publicacion = publicacionrepository.findById(idPublicacion).get();
       modelo.addAttribute("publicacion", publicacion);
@@ -51,14 +59,14 @@ public class PublicacionController {
     }
 
     // eliminar
-    @GetMapping("/publicacions/eliminar/{idPublicacion}")
+    @GetMapping("/eliminar/{idPublicacion}")
     public String eliminarPublicacion(@PathVariable("idPublicacion") Integer idPublicacion, Model model) {
         publicacionrepository.deleteById(idPublicacion);
-        return "redirect:/publicacions";
+        return "redirect:";
     }
 
     // Cambiar estado
-    @GetMapping("/publicacions/estado/{idPublicacion}")
+    @GetMapping("/estado/{idPublicacion}")
     public String estadoPublicacion(@PathVariable("idPublicacion") Integer idPublicacion, Model modelo) {
         Optional<Publicacion> publicacion = publicacionrepository.findById(idPublicacion);
         if (publicacion.get().getEstado() == false) {
@@ -67,6 +75,6 @@ public class PublicacionController {
             publicacion.get().setEstado(false);
         }
         publicacionrepository.save(publicacion.get());
-        return "redirect:/publicacions";
+        return "redirect:";
     }
 }

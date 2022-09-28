@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- *************************************************************************************************** -->
+<!-- ------------------------------------------HEAD-------------------------------------- -->
+<!-- *************************************************************************************************** -->
+<head th:replace="layout/base::head"></head>
+<body>
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------LOADING-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <div th:replace="layout/base::loading"></div>
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------LOGIN-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <div th:replace="layout/base::login"></div>
+
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------MENU-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <header th:replace="layout/base::menu"></header>
+    <!-- ************************************************************************************************************************ -->
+    <!-- ************************************************************************************************************************ -->
+    <!-- ------------------------------------------------CONTENIDO------------------------------------------- -->
+
+    <section class="inner-page-banner-section gradient-bg">
+        <div class="illustration-img"><img src="assets/images/Save the Earth-bro.png" alt="50%"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="inner-page-content-area">
+                        <h2 class="page-title">Publicación</h2>
+                        <nav aria-label="breadcrumb" class="page-header-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="home-one.html">Home</a></li>
+                                <li class="breadcrumb-item">Publicación</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contact-section mt-minus pb-120">
+        <div class="container">
+            <div class="contact-form-area">
+                <form th:object="${Formulario}">
+                    <div class="form-group">
+                        <label for="titulo">Titulo:</label>
+                        <input th:field="*{titulo}" type="text" class="form-control" id="titulo"
+                            placeholder="Titulo">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo de publicación:</label>
+                        <select th:field="*{tipo}" class="form-control" >
+                            <option value="">Seleccione un tipo...</option>
+                            <option value="0">Información</option>
+                            <option value="1">Noticia</option>
+                        </select>
+                    </div>
+                    <div id="dinamico" class="form-group">
+                        <div class="form-group">
+                            <label for="texto">Texto-1:</label>
+                            <select class="form-control" >
+                                <option value="">Seleccione el tipo de texto...</option>
+                                <option value="0">Parrafo</option>
+                                <option value="1">Citado</option>
+                                <option value="2">Bibliografia</option>
+                            </select>
+                            <textarea class="form-control"  rows="6"></textarea>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="texto">Texto-2:</label>
+                            <select  class="form-control" >
+                                <option >Seleccione el tipo de texto...</option>
+                                <option value="0">Parrafo</option>
+                                <option value="1">Citado</option>
+                                <option value="2">Bibliografia</option>
+                            </select>
+                            <textarea class="form-control"  rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button id="agregart" class="btn btn-info">Agregar Texto</button>
+                    </div>
+                    
+                    <div id="dinamic" class="form-group">
+                        <label> Imagen-1:</label> <input type="file" name="imagen" required>
+                    </div>
+                    <div class="form-group">
+                        <button id="agregar" class="btn btn-info">Agregar Imagen</button>
+                    </div>
+                    
+                    
+                    <script type="text/javascript">
+                        // Constantes para el div contenedor de los inputs y el botón de agregar
+                        const contenedor = document.querySelector('#dinamic');
+                        const btnAgregar = document.querySelector('#agregar');
+                        const contenedoro = document.querySelector('#dinamico');
+                        const btnAgregart = document.querySelector('#agregart');
+
+                        // Variable para el total de elementos agregados
+                        let total = 2, total2=3;
+                        /**
+                         * Método que se ejecuta cuando se da clic al botón de agregar elementos
+                         */
+                        btnAgregar.addEventListener('click', e => {
+                            let div = document.createElement('div');
+                            if (total==4) {
+                                
+                            } else {
+                                div.innerHTML = `<label> Imagen-${total++}:</label> <input type="file" name="imagen" required><button class="btn btn-warning" onclick="eliminar(this)">Eliminar</button>`;
+                                contenedor.appendChild(div);
+                            }
+                            
+                        })
+                        btnAgregart.addEventListener('click', e => {
+                            let div = document.createElement('div');
+                            if (total2==6) {
+                                
+                            } else {
+                                div.innerHTML = `<div class="form-group">
+                            <label for="texto">Texto-${total2++}:</label>
+                            <select class="form-control" >
+                                <option >Seleccione el tipo de texto...</option>
+                                <option value="0">Parrafo</option>
+                                <option value="1">Citado</option>
+                                <option value="2">Bibliografia</option>
+                            </select>
+                            <textarea  class="form-control"  rows="6"></textarea>
+                        </div> <button class="btn btn-warning" onclick="eliminara(this)">Eliminar</button>`;
+                                contenedoro.appendChild(div);
+                            }
+                            
+                        })
+
+                        /**
+                         * Método para eliminar el div contenedor del input
+                         * @param {this} e 
+                         */
+                        const eliminar = (e) => {
+                            const divPadre = e.parentNode;
+                            contenedor.removeChild(divPadre);
+                            actualizarContador();
+                        };
+                        const eliminara = (e) => {
+                            const divPadre = e.parentNode;
+                            contenedoro.removeChild(divPadre);
+                            actualizarContadoro();
+                        };
+
+                        /**
+                         * Método para actualizar el contador de los elementos agregados
+                        */
+                        const actualizarContador = () => {
+                            let divs = contenedor.children;
+                            total = 1;
+                            for (let i = 0; i < divs.length; i++) {
+                                divs[i].children[0].innerHTML = "Imagen-"+total++;
+                            }//end for
+                        };
+                        const actualizarContadoro = () => {
+                            let divs = contenedoro.children;
+                            total2 = 1;
+                            for (let i = 0; i < divs.length; i++) {
+                                divs[i].children[0].innerHTML = "Texto-"+total2++;
+                            }//end for
+                        };
+                    </script>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ---------------------------------------------FIN-CONTENIDO------------------------------------------- -->
+    <!-- ************************************************************************************************************************ -->
+    <!-- ************************************************************************************************************************ -->
+
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------FOOTER-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <footer th:replace="layout/base::footer"></footer>
+
+    <div class="scroll-to-top">
+        <span class="scroll-icon">
+            <i class="fa fa-rocket"></i>
+        </span>
+    </div>
+    <!-- *************************************************************************************************** -->
+    <!-- ------------------------------------------SCRIPT-------------------------------------- -->
+    <!-- *************************************************************************************************** -->
+    <div th:replace="layout/base::script"></div>
+</body>
+
+</html>

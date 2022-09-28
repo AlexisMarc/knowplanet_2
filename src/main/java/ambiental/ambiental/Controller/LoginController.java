@@ -7,17 +7,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import ambiental.ambiental.Model.Usuario;
 import ambiental.ambiental.Service.UsuarioServiceImpl;
 import ambiental.ambiental.Service.UsuarioValidacion;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 // ----------------------------RUTA PRINCIPAL------------------------//
-@SessionAttributes("usuario")
 @RequestMapping("/login")
 
 // ----------------------------HANDLERS O RUTAS
@@ -31,7 +29,7 @@ public class LoginController {
 
 
     // -------------------------------------------------------------VER FORM----------------------------------------------------//
-    @GetMapping( "/form")
+    @GetMapping( path = {"/","","/form"})
     public String verLogin(Model m) {
 
         Usuario usuario = new Usuario();

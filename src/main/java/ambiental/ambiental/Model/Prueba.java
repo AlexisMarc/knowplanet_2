@@ -1,14 +1,14 @@
 package ambiental.ambiental.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="Prueba")
@@ -26,8 +26,7 @@ public class Prueba {
     @NotEmpty
     private Boolean estado;
 
-    @OneToOne
-    @JoinColumn(name = "FK_PUBLICACION", updatable = false, nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Publicacion publicacion;
     
     public Prueba() {
